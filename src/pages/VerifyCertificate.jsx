@@ -1,4 +1,4 @@
-import React, { useState, useCallback, useEffect } from 'react';
+import { useState, useCallback, useEffect } from 'react';
 import Certificate from '../components/Certificate';
 import { fetchCertificateByHash } from '../services/anchorService';
 import './VerifyCertificate.css';
@@ -87,7 +87,7 @@ const VerifyCertificate = ({ hash: propHash }) => {
       {/* Header */}
       <div className="vp-header">
         <div className="vp-header-inner">
-          <div className="vp-header-icon">🔍</div>
+          <div className="vp-header-icon"></div>
           <div>
             <h1>Verify Certificate</h1>
             <p>Instantly verify the authenticity of any academic credential</p>
@@ -130,7 +130,42 @@ const VerifyCertificate = ({ hash: propHash }) => {
 
         {/* Result — Verified */}
         {status === 'verified' && certificate && (
-          <Certificate cert={certificate} onEmailClick={() => {}} />
+          <div className="vp-verified-outer">
+
+            {/* Trust strip */}
+            <div className="vp-trust-strip">
+              <div className="vp-trust-checkmark">✓</div>
+              <div className="vp-trust-copy">
+                <strong>Blockchain Verified</strong>
+                <span>This certificate is authentic and has not been tampered with</span>
+              </div>
+              <div className="vp-trust-chips">
+                <span className="vp-chip vp-chip-solana">◎ Solana Devnet</span>
+                <span className="vp-chip vp-chip-anchor">⚓ Anchor</span>
+                <span className="vp-chip vp-chip-secure">🔒 Tamper-Proof</span>
+                <span className="vp-chip vp-chip-time">
+                  Verified {new Date().toLocaleString()}
+                </span>
+              </div>
+            </div>
+
+            <Certificate cert={certificate} onEmailClick={() => {}} verifyMode={true} />
+
+            {/* Footer proof bar */}
+            <div className="vp-proof-bar">
+              <span className="vp-proof-label">Certificate Hash</span>
+              <code className="vp-proof-hash">{certificate.hash}</code>
+              <a
+                className="vp-proof-explorer-link"
+                href={`https://explorer.solana.com/?cluster=devnet`}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                View on Solana Explorer ↗
+              </a>
+            </div>
+
+          </div>
         )}
 
         {/* Result — Invalid */}

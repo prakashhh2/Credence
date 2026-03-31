@@ -8,6 +8,31 @@ import VerifyCertificate from "./pages/VerifyCertificate.jsx";
 import AdminPortal from "./pages/AdminPortal.jsx";
 import logo from "./assets/transparent-logo.png";
 
+function BetaBanner() {
+  const [dismissed, setDismissed] = useState(
+    () => sessionStorage.getItem("credence-beta-dismissed") === "true"
+  );
+  if (dismissed) return null;
+  return (
+    <div className="beta-banner">
+      <span className="beta-tag">BETA</span>
+      <p className="beta-text">
+        <strong>Development Phase</strong> — Running on Solana Devnet. This is an experimental platform; data is not permanent and may be reset.
+      </p>
+      <button
+        className="beta-dismiss"
+        onClick={() => {
+          sessionStorage.setItem("credence-beta-dismissed", "true");
+          setDismissed(true);
+        }}
+        aria-label="Dismiss notice"
+      >
+        ✕
+      </button>
+    </div>
+  );
+}
+
 
 
 function Section({ title, intro, children, className = "" }) {
@@ -87,6 +112,7 @@ function App() {
   if (currentPage !== "home") {
     return (
       <div className="app">
+        <BetaBanner />
         <Navbar onHome={() => setCurrentPage("home")} />
         {renderPage()}
         <Footer />
@@ -96,6 +122,7 @@ function App() {
 
   return (
     <div className="app">
+      <BetaBanner />
       {/* Global Navigation */}
       <Navbar onHome={() => setCurrentPage("home")} />
 

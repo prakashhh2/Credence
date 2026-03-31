@@ -4,6 +4,61 @@
  */
 
 /* ════════════════════════════════════════════════════════
+   Beta Banner
+   ════════════════════════════════════════════════════════ */
+
+.beta-banner {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.6rem 1.25rem;
+  background: linear-gradient(90deg, #fffbeb 0%, #fef3c7 100%);
+  border-bottom: 1px solid #f59e0b;
+  font-size: 0.875rem;
+  flex-wrap: wrap;
+}
+
+.beta-tag {
+  flex-shrink: 0;
+  background: #f59e0b;
+  color: #fff;
+  font-size: 0.7rem;
+  font-weight: 800;
+  letter-spacing: 0.1em;
+  padding: 0.2rem 0.55rem;
+  border-radius: 4px;
+  text-transform: uppercase;
+}
+
+.beta-text {
+  flex: 1;
+  margin: 0;
+  color: #92400e;
+  line-height: 1.4;
+}
+
+.beta-text strong {
+  color: #78350f;
+}
+
+.beta-dismiss {
+  flex-shrink: 0;
+  background: none;
+  border: none;
+  color: #b45309;
+  font-size: 1rem;
+  cursor: pointer;
+  padding: 0.2rem 0.4rem;
+  border-radius: 4px;
+  line-height: 1;
+  transition: background 0.15s;
+}
+
+.beta-dismiss:hover {
+  background: rgba(180, 83, 9, 0.1);
+}
+
+/* ════════════════════════════════════════════════════════
    Root & Layout
    ════════════════════════════════════════════════════════ */
 
@@ -453,6 +508,7 @@
    Responsive Design
    ════════════════════════════════════════════════════════ */
 
+/* ── Tablet (≤1024px) ── */
 @media (max-width: 1024px) {
   .hero-title {
     font-size: 2.8rem;
@@ -462,9 +518,14 @@
     font-size: 1.8rem;
   }
 
+  /* 4-card grid → 2×2 on tablets */
+  .card-grid-4 {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
   .about-grid {
     grid-template-columns: 1fr;
-    gap: 2.5rem;
+    gap: 2rem;
   }
 
   .about-column {
@@ -477,51 +538,72 @@
   }
 }
 
+/* ── Mobile (≤768px) ── */
 @media (max-width: 768px) {
-  .container {
-    padding: 0 1.5rem;
+  /* Reduce section inner padding since .container already pads */
+  .section {
+    padding: 3rem 0;
   }
 
+  .container {
+    padding: 0 1.25rem;
+  }
+
+  /* Hero */
   .hero {
-    padding: 2rem 1.5rem;
+    min-height: auto;
+    padding: 3rem 1.25rem 2.5rem;
+  }
+
+  .hero-logo {
+    width: 96px;
+    margin-bottom: 1.25rem;
+  }
+
+  .hero-bag {
+    font-size: 1rem;
   }
 
   .hero-title {
-    font-size: 2rem;
+    font-size: clamp(1.75rem, 7vw, 2.4rem);
+    margin-bottom: 0.75rem;
   }
 
   .hero-subtitle {
-    font-size: 0.95rem;
+    font-size: 0.96rem;
+    margin-bottom: 2rem;
   }
 
   .hero-actions {
     flex-direction: column;
     gap: 0.75rem;
+    width: 100%;
+    max-width: 320px;
+    margin: 0 auto;
   }
 
   .btn {
     width: 100%;
-    padding: 0.75rem 1.2rem;
+    padding: 0.8rem 1.25rem;
+    font-size: 0.95rem;
   }
 
-  .section {
-    padding: 3rem 1.5rem;
-  }
-
+  /* Section text */
   .section-title {
     font-size: 1.5rem;
   }
 
   .section-intro {
-    font-size: 0.95rem;
+    font-size: 0.93rem;
     margin-bottom: 2rem;
   }
 
+  /* Card grids → single column */
   .card-grid-2,
   .card-grid-3,
   .card-grid-4 {
     grid-template-columns: 1fr;
-    gap: 1.5rem;
+    gap: 1.25rem;
   }
 
   .info-card {
@@ -534,18 +616,20 @@
     font-size: 1rem;
   }
 
+  /* About section */
   .about-column {
     padding: 1.25rem;
     border-radius: 10px;
   }
 
   .about-column h3 {
-    font-size: 1.1rem;
-    margin: 1.5rem 0 0.75rem 0;
+    font-size: 1.05rem;
+    margin: 1.25rem 0 0.6rem 0;
   }
 
   .about-column p {
     font-size: 0.9rem;
+    line-height: 1.7;
   }
 
   .features-list li,
@@ -554,6 +638,15 @@
     font-size: 0.9rem;
   }
 
+  .user-roles {
+    gap: 1rem;
+  }
+
+  .user-roles .info-card-minimal {
+    padding: 1rem 1.25rem;
+  }
+
+  /* Wallet */
   .wallet-wrapper {
     top: 50px;
     right: 1rem;
@@ -565,22 +658,60 @@
   }
 }
 
+/* ── Small phones (≤480px) ── */
 @media (max-width: 480px) {
-  .hero-logo {
-    width: 100px;
-  }
-
-  .hero-title {
-    font-size: 1.8rem;
-    margin-bottom: 0.5rem;
+  .container {
+    padding: 0 1rem;
   }
 
   .section {
-    padding: 2rem 1rem;
+    padding: 2.25rem 0;
+  }
+
+  .hero {
+    padding: 2rem 1rem 2rem;
+  }
+
+  .hero-logo {
+    width: 80px;
+    margin-bottom: 1rem;
+  }
+
+  .hero-bag {
+    font-size: 0.875rem;
+  }
+
+  .hero-title {
+    font-size: clamp(1.55rem, 8vw, 1.9rem);
+    margin-bottom: 0.6rem;
+  }
+
+  .hero-subtitle {
+    font-size: 0.9rem;
+    margin-bottom: 1.75rem;
+  }
+
+  .hero-actions {
+    max-width: 100%;
   }
 
   .section-title {
     font-size: 1.3rem;
+  }
+
+  .section-intro {
+    font-size: 0.88rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .card-grid-2,
+  .card-grid-3,
+  .card-grid-4 {
+    gap: 1rem;
+  }
+
+  .info-card {
+    padding: 1.25rem;
   }
 
   .about-column {
@@ -588,8 +719,12 @@
   }
 
   .about-column h3 {
-    font-size: 1rem;
+    font-size: 0.97rem;
     margin: 1rem 0 0.5rem 0;
+  }
+
+  .about-grid {
+    gap: 1.25rem;
   }
 
   .wallet-wrapper {
@@ -601,6 +736,34 @@
   .wallet-btn {
     width: 100%;
     justify-content: center;
+  }
+}
+
+/* ── Extra-small (≤360px) ── */
+@media (max-width: 360px) {
+  .hero-logo {
+    width: 68px;
+  }
+
+  .hero-title {
+    font-size: 1.45rem;
+  }
+
+  .hero-subtitle {
+    font-size: 0.85rem;
+  }
+
+  .btn {
+    font-size: 0.9rem;
+    padding: 0.75rem 1rem;
+  }
+
+  .info-card {
+    padding: 1rem;
+  }
+
+  .about-column {
+    padding: 0.875rem;
   }
 }
 

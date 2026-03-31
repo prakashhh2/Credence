@@ -118,7 +118,7 @@ const StudentPortal = ({ hash: propHash }) => {
       {/* Header */}
       <div className="sp-header">
         <div className="sp-header-inner">
-          <div className="sp-header-icon">👨‍🎓</div>
+          <div className="sp-header-icon"></div>
           <div>
             <h1>Student Portal</h1>
             <p>View and download your blockchain-verified certificate</p>

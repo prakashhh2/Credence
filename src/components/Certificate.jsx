@@ -1,9 +1,11 @@
-import React, { useCallback, useState } from 'react';
+import { useCallback, useState, useEffect } from 'react';
+import QRCode from 'qrcode';
 import './Certificate.css';
 
 
-export default function Certificate({ cert, onIPFSDownload, onEmailClick }) {
+export default function Certificate({ cert, onIPFSDownload, onEmailClick, verifyMode = false }) {
   const [copied, setCopied] = useState(false);
+  const [qrDataUrl, setQrDataUrl] = useState('');
 
   const copyHash = useCallback(() => {
     if (!cert?.hash) return;
@@ -12,21 +14,55 @@ export default function Certificate({ cert, onIPFSDownload, onEmailClick }) {
     setTimeout(() => setCopied(false), 2000);
   }, [cert]);
 
+  useEffect(() => {
+    if (!cert?.hash) return;
+    const verifyUrl = `${window.location.origin}${window.location.pathname}#verify/${cert.hash}`;
+    QRCode.toDataURL(verifyUrl, {
+      width: 240,
+      margin: 2,
+      color: { dark: '#0b1c3d', light: '#ffffff' },
+    })
+      .then(setQrDataUrl)
+      .catch(() => {});
+  }, [cert?.hash]);
+
+  const downloadQR = useCallback(() => {
+    if (!qrDataUrl) return;
+    const a = document.createElement('a');
+    a.href = qrDataUrl;
+    a.download = `verify-qr-${cert?.hash?.slice(0, 12)}.png`;
+    a.click();
+  }, [qrDataUrl, cert?.hash]);
+
   if (!cert) return null;
 
   return (
     <div className="cert-container">
-      {/* Success Banner */}
-      <div className="cert-banner">
+
+      {/* Banner */}
+      <div className={`cert-banner${verifyMode ? ' cert-banner-verify' : ''}`}>
         <span className="cert-check-icon"></span>
         <div className="cert-banner-text">
-          <h2>Certificate Issued ✓</h2>
-          <p>Recorded on Solana Devnet via Anchor · Transaction confirmed</p>
+          {verifyMode ? (
+            <>
+              <h2>Certificate Verified ✓</h2>
+              <p>Authentic record confirmed on Solana Devnet · Blockchain verified</p>
+            </>
+          ) : (
+            <>
+              <h2>Certificate Issued ✓</h2>
+              <p>Recorded on Solana Devnet via Anchor · Transaction confirmed</p>
+            </>
+          )}
         </div>
+        {verifyMode && (
+          <div className="cert-verified-badge">◎ Solana Devnet</div>
+        )}
       </div>
 
       {/* Main Content Grid */}
       <div className="cert-grid">
+
         {/* Left: Certificate Details */}
         <div className="cert-details-section">
           <h3 className="cert-section-title">Certificate Information</h3>
@@ -57,7 +93,7 @@ export default function Certificate({ cert, onIPFSDownload, onEmailClick }) {
               </div>
             ))}
 
-            {/* IPFS CID (if available) */}
+            {/* IPFS CID */}
             {cert.certificateDocCid && (
               <div className="cert-info-row">
                 <span className="cert-info-label">IPFS CID</span>
@@ -99,7 +135,7 @@ export default function Certificate({ cert, onIPFSDownload, onEmailClick }) {
               </span>
             </div>
 
-            {/* Certificate PDA — searchable in Solana Explorer */}
+            {/* Certificate PDA */}
             {cert.certificatePda && (
               <div className="cert-info-row">
                 <span className="cert-info-label">On-chain Account</span>
@@ -116,6 +152,25 @@ export default function Certificate({ cert, onIPFSDownload, onEmailClick }) {
             )}
           </div>
         </div>
+
+        {/* Right: QR Code */}
+        <div className="cert-qr-section">
+          <h3 className="cert-section-title">Verification QR Code</h3>
+          {qrDataUrl ? (
+            <>
+              <div className="cert-qr-wrapper">
+                <img src={qrDataUrl} alt="Verification QR Code" className="cert-qr-image" />
+              </div>
+              <p className="cert-qr-caption">Scan to instantly verify this certificate</p>
+              <button className="cert-download-qr-btn" onClick={downloadQR}>
+                ⬇ Download QR Code
+              </button>
+            </>
+          ) : (
+            <div className="cert-qr-placeholder">Generating QR…</div>
+          )}
+        </div>
+
       </div>
 
       {/* Email Student */}
@@ -126,6 +181,7 @@ export default function Certificate({ cert, onIPFSDownload, onEmailClick }) {
           </button>
         </div>
       )}
+
     </div>
   );
 }

@@ -182,6 +182,49 @@
   transform: scale(0.98);
 }
 
+/* ─── Verify Mode Banner ─── */
+.cert-banner-verify {
+  background: linear-gradient(135deg, #e0f2fe 0%, #bae6fd 100%);
+  border-left-color: #0284c7;
+  box-shadow: 0 2px 8px rgba(2, 132, 199, 0.12);
+  flex-wrap: wrap;
+}
+
+.cert-banner-verify .cert-banner-text h2 {
+  color: #0c4a6e;
+}
+
+.cert-banner-verify .cert-banner-text p {
+  color: #0369a1;
+}
+
+.cert-verified-badge {
+  margin-left: auto;
+  background: linear-gradient(135deg, #9945ff, #14f195);
+  color: white;
+  border-radius: 999px;
+  padding: 0.35rem 1rem;
+  font-size: 0.8rem;
+  font-weight: 700;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+/* ─── QR Placeholder ─── */
+.cert-qr-placeholder {
+  width: 100%;
+  max-width: 300px;
+  aspect-ratio: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #f3f4f6;
+  border: 2px dashed #d1d5db;
+  border-radius: 8px;
+  color: #9ca3af;
+  font-size: 0.9rem;
+}
+
 /* ─── QR Section ─── */
 .cert-qr-section {
   padding: 1.5rem;
