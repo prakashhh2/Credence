@@ -64,9 +64,10 @@
 
 .app {
   font-family: "Inter", system-ui, -apple-system, BlinkMacSystemFont;
-  background-color: #f8fafc;
-  color: #0f172a;
+  background-color: var(--color-bg-primary);
+  color: var(--color-text-primary);
   min-height: 100vh;
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 .container {
@@ -92,9 +93,10 @@
       rgba(30, 136, 229, 0.12),
       transparent 60%
     ),
-    #f8fafc;
+    var(--color-bg-primary);
   position: relative;
   overflow: hidden;
+  transition: background-color 0.3s ease;
 }
 
 .hero-main {
@@ -116,13 +118,13 @@
 .hero-bag {
   font-size: 1.4rem;
   font-weight: 700;
-  color: #0b1c3d;
+  color: var(--color-text-primary);
 }
 
 .hero-title {
   font-size: clamp(2.5rem, 5vw, 3.5rem);
   font-weight: 700;
-  color: #0b1c3d;
+  color: var(--color-text-primary);
   letter-spacing: -0.02em;
   margin: 0 0 1rem 0;
   line-height: 1.1;
@@ -132,7 +134,7 @@
   max-width: 640px;
   font-size: 1.1rem;
   line-height: 1.7;
-  color: #64748b;
+  color: var(--color-text-muted);
   margin: 0 auto 2.5rem;
 }
 
@@ -197,25 +199,26 @@
 
 .section {
   padding: 5rem 2rem;
-  background-color: #f8fafc;
+  background-color: var(--color-bg-primary);
   position: relative;
+  transition: background-color 0.3s ease;
 }
 
 .section:nth-child(even) {
-  background-color: #f0f5fb;
+  background-color: var(--color-bg-secondary);
 }
 
 .section-title {
   font-size: 2.2rem;
   font-weight: 700;
   margin: 0 0 1rem 0;
-  color: #0b1c3d;
+  color: var(--color-text-primary);
   text-align: center;
 }
 
 .section-intro {
   font-size: 1rem;
-  color: #64748b;
+  color: var(--color-text-muted);
   text-align: center;
   margin: 0 auto 3rem;
   max-width: 700px;
@@ -223,15 +226,15 @@
 }
 
 .how-it-works {
-  background: linear-gradient(180deg, #f0f5fb 0%, #e8f1fd 100%);
+  background: var(--color-bg-secondary);
 }
 
 .about-project {
-  background: linear-gradient(180deg, #ffffff 0%, #f8fafc 100%);
+  background: var(--color-bg-primary);
 }
 
 .getting-started {
-  background: linear-gradient(180deg, #f8fafc 0%, #f0f5fb 100%);
+  background: var(--color-bg-secondary);
 }
 
 /* ════════════════════════════════════════════════════════
@@ -261,8 +264,8 @@
    ════════════════════════════════════════════════════════ */
 
 .info-card {
-  background: white;
-  border: 1px solid #e2e8f0;
+  background: var(--color-bg-primary);
+  border: 1px solid var(--color-border);
   border-radius: 12px;
   padding: 2rem;
   position: relative;
@@ -295,11 +298,11 @@
   font-size: 1.2rem;
   font-weight: 600;
   margin: 0 0 1rem 0;
-  color: #0b1c3d;
+  color: var(--color-text-primary);
 }
 
 .card-content {
-  color: #64748b;
+  color: var(--color-text-muted);
   line-height: 1.7;
   font-size: 0.95rem;
 }
@@ -352,9 +355,9 @@
 
 .about-column {
   padding: 2rem;
-  background: white;
+  background: var(--color-bg-primary);
   border-radius: 12px;
-  border: 1px solid #e2e8f0;
+  border: 1px solid var(--color-border);
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
   transition: all 0.3s ease;
 }
@@ -368,7 +371,7 @@
   font-size: 1.3rem;
   font-weight: 600;
   margin: 2rem 0 1rem 0;
-  color: #0b1c3d;
+  color: var(--color-text-primary);
   display: flex;
   align-items: center;
   gap: 0.75rem;
@@ -388,7 +391,7 @@
 }
 
 .about-column p {
-  color: #64748b;
+  color: var(--color-text-muted);
   line-height: 1.8;
   margin: 0 0 1.5rem 0;
   font-size: 0.95rem;
