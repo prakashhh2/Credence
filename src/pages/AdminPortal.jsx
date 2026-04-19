@@ -282,7 +282,7 @@ export default function AdminPortal() {
       {/* Header */}
       <div className="univ-header">
         <div className="univ-header-inner">
-          <div className="univ-header-icon">🎓</div>
+          <div className="univ-header-icon"></div>
           <div>
             <h1>{universityName || 'University Admin Portal'}</h1>
             <p>Issue Solana blockchain certificates via Anchor</p>
