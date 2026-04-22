@@ -106,7 +106,7 @@
 }
 
 .hero-logo {
-  width: 120px;
+  width: 144px;
   margin: 0 auto 1.5rem;
   display: block;
 }
@@ -559,7 +559,7 @@
   }
 
   .hero-logo {
-    width: 96px;
+    width: 115px;
     margin-bottom: 1.25rem;
   }
 
@@ -676,7 +676,7 @@
   }
 
   .hero-logo {
-    width: 80px;
+    width: 96px;
     margin-bottom: 1rem;
   }
 
@@ -745,7 +745,7 @@
 /* ── Extra-small (≤360px) ── */
 @media (max-width: 360px) {
   .hero-logo {
-    width: 68px;
+    width: 82px;
   }
 
   .hero-title {
